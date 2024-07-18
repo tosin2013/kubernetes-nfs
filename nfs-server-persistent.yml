@@ -89,6 +89,12 @@ spec:
   - port: 2049
     protocol: TCP
     targetPort: 2049
+  - port: 111
+    protocol: TCP
+    targetPort: 111
+  - port: 111
+    protocol: UDP
+    targetPort: 111
   selector:
     deployment: nfs-server-alpine
   type: ClusterIP
