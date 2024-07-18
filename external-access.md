@@ -91,3 +91,6 @@ scp /local/file.txt user@example-route-host:/remote/directory/
 
 ## Conclusion
 By following these steps, you can push files to a container within an OpenShift instance from an external source. This method leverages OpenShift's service and route capabilities to securely expose the container for file transfers.
+
+oc adm policy add-scc-to-user anyuid -z default
+sudo mount -t nfs nfs-server-alpine.nfs-server.svc.cluster.local:/nfsshare /mnt/nfs

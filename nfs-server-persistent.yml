@@ -86,22 +86,28 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: nfs-service
+  namespace: nfs-server
   labels:
     app: nfs-server-alpine
-    app.kubernetes.io/component: nfs-server-alpine
-    app.kubernetes.io/instance: nfs-server-alpine
-  name: nfs-server-alpine
 spec:
-  ports:
-  - port: 2049
-    protocol: TCP
-    targetPort: 2049
-  - port: 111
-    protocol: TCP
-    targetPort: 111
-  - port: 111
-    protocol: UDP
-    targetPort: 111
   selector:
     deployment: nfs-server-alpine
+  ports:
+    - name: nfs
+      protocol: TCP
+      port: 2049
+      targetPort: 2049
+    - name: rpcbind-tcp
+      protocol: TCP
+      port: 111
+      targetPort: 111
+    - name: rpcbind-udp
+      protocol: UDP
+      port: 111
+      targetPort: 111
+    - name: mountd
+      protocol: TCP
+      port: 20048
+      targetPort: 20048
   type: ClusterIP
